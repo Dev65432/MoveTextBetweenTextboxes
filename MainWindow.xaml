@@ -1,0 +1,91 @@
+﻿<Window x:Class="MoveTextBetweenTextboxes.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MoveTextBetweenTextboxes"
+        mc:Ignorable="d"
+        Title="{Binding Title}" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Row="0"  Header="Ввод данных">
+            <Grid >
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <Trigger Property="Grid.Column" Value="0">
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="Margin" Value="0,3"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Margin" Value="3,2,0,2"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" >
+                    <GroupBox Header="Исходные:" Margin="5">
+                        <TextBox Text="{Binding ItemsOriginal, Mode=TwoWay}" 
+                                 AcceptsReturn="True"
+                                 VerticalScrollBarVisibility="Visible"/>
+                    </GroupBox >
+                </Grid>
+                <Grid Grid.Row="1" >
+                    <GroupBox Grid.Row="2" Header="Управление">
+                        <Button Content="Start" Command="{Binding GetPersonsCommand}" />
+                    </GroupBox>
+                </Grid>
+                <Grid Grid.Row="2" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="Очередь:" Grid.Row="1" Grid.Column="0" Margin="5">
+                        <TextBox Text="{Binding ItemsQueue, Mode=TwoWay}" 
+                                 AcceptsReturn="True"
+                                 VerticalScrollBarVisibility="Visible"/>
+
+                    </GroupBox >
+                    <!--Grid.Row="1"-->
+                    <GroupBox Header="Выполненные:" Grid.Row="1" Grid.Column="1" Margin="5">
+                        <DockPanel>
+                        <TextBox Text="{Binding ItemsCompleted, Mode=TwoWay}" 
+                                        IsReadOnly="True"
+                                         Background="#11841712"
+                                         AcceptsReturn="True"
+                                        VerticalScrollBarVisibility="Visible"
+                                        DockPanel.Dock="Top"/>
+                            <Button Content="Очситить (не подключал)"/>
+                        </DockPanel>
+                    </GroupBox>
+
+                    <GroupBox Header="Ошибки:" Grid.Row="1" Grid.Column="2" Margin="5">
+                        <DockPanel>
+                            <TextBox Text="{Binding ItemsErros, Mode=TwoWay}"  
+                                         IsReadOnly="True"
+                                         Background="#11841712"
+                                         AcceptsReturn="True"
+                                         VerticalScrollBarVisibility="Visible"
+                                         DockPanel.Dock="Top"/>
+                            <Button Content="Очистить(не подключал)"/>
+                        </DockPanel>
+                    </GroupBox>
+                </Grid>
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Window>
